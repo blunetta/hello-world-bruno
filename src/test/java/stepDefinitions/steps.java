@@ -6,8 +6,8 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
+import org.json.simple.JSONObject;
 import org.junit.Test;
 import org.testng.Assert;
 
@@ -89,7 +89,53 @@ public class steps {
 	
 		@Test
 		public void test3() {
+			
+			JSONObject request = new JSONObject();
+			request.put("userId", "3");
+			request.put("title", "ea molestias quasi exercitationem repellat qui ipsa sit aut");
+			request.put("body", "nmolestiae porro eius odio et labore et velit aut");
+			
+			System.out.println(request);
+			
+			given().
+			body(request.toJSONString()).
+			when().post("https://jsonplaceholder.typicode.com/posts").
+			then().statusCode(201);
+			
+//			given().
+//			body(request.toJSONString()).
+//			when().post("https://jsonplaceholder.typicode.com/posts").
+////			then().assertThat()notNullValue().body("tittle");
 	
+		}
+		
+		@Test
+		public void test4() {
+			
+				RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
+				// Request Object
+				RequestSpecification httpRequest = RestAssured.given();
+				
+				JSONObject requestParams = new JSONObject();
+				
+				requestParams.put("userId", "3");
+				requestParams.put("title", "dasdasd");
+				requestParams.put("body", "nmolestiae porro eius odio et labore et velit aut");
+				
+				httpRequest.header("Content-Type","Application/json");
+				httpRequest.body(requestParams.toString());
+				
+				// Response Object 
+				Response response = httpRequest.request(Method.POST, "/posts");
+				
+				// Status Code Validation
+				statusCode = response.getStatusCode();
+				// verification point of status code
+				System.out.println(statusCode);
+				Assert.assertEquals(statusCode, 201);
+				//Verification parameter
+				//Assert.assertNotNull(requestParams);
+				
 		}
 
 }
