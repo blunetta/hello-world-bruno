@@ -119,7 +119,7 @@ public class steps {
 				JSONObject requestParams = new JSONObject();
 				
 				requestParams.put("userId", "3");
-				requestParams.put("title", "dasdasd");
+				requestParams.put("title", "");
 				requestParams.put("body", "nmolestiae porro eius odio et labore et velit aut");
 				
 				httpRequest.header("Content-Type","Application/json");
